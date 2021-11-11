@@ -1,0 +1,12 @@
+/* HERE THERE THE STYLE OF HAMBURGERMENU */
+
+.HamburgerMenu{
+
+}
+
+@media screen and (max-width:500px) {
+    .HamburgerMenu{
+        height:30px;
+        width:30px;
+    }
+}

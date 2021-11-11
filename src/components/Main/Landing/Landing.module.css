@@ -1,0 +1,22 @@
+
+.landingContainer {
+    padding: 1em 2em;
+}
+
+.landingContainer h1 {
+    width: 40%;
+    font-size: 3em;
+    color: var(--black);
+}
+
+.landingContainer img {
+    margin-top:20px;
+}
+
+
+@media screen and (max-width:500px) {
+    .landingContainer h1{
+        font-size:1.5em;
+        width:100%;
+    }
+}

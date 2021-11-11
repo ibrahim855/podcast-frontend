@@ -1,0 +1,25 @@
+
+
+.notification{
+    position:absolute;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    top:0;
+    left:0;
+    right:0;
+    height: 3em;
+    color:whitesmoke;
+}
+
+.error{
+    background-color: red;
+}
+
+.success{
+    background-color:green;
+}
+
+.pending{
+    background-color:yellow;
+}

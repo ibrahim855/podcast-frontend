@@ -1,0 +1,13 @@
+.inputContainer input{
+    display:block;
+    width: 100%;
+    padding:0;
+    margin: 0;
+    font-size: 12px;
+    height: 2em;
+}
+
+.inputContainer label {
+        margin-bottom: 10px;
+}
+

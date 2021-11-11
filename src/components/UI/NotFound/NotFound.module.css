@@ -1,0 +1,21 @@
+.not-found-component{
+   padding: 1em 1em;
+}
+
+.not-found-component h2{
+    color: var(--black);
+}
+
+.not-found-component p{
+    margin-top:10px;
+    font-weight: 500;
+}
+
+.not-found-component u{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.not-found-component u:hover{
+    text-decoration: none;
+}

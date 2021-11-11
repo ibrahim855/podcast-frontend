@@ -1,0 +1,32 @@
+/* CDN IMPORT FROM GOOGLE FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300;0,700;1,300;1,500&display=swap');
+
+/* COLOR THEMES */
+:root{
+  --blue: #4361ee;
+  --black: #001219;
+  --red: #ae2012;
+  --white: #fff1e6;
+ 
+}
+
+:root{
+  font-size: 14px;
+  z-index:-100;
+}
+
+
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  text-decoration:none;
+}
+
+
+/* GENERAL STYLES  */
+
+body {
+  font-family: 'Red Hat Mono', monospace;
+}
