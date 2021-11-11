@@ -8,6 +8,7 @@ import Podcast from './Podcast/Podcast';
 
 const Podcasts = () => {
   const [podcasts, setPodcasts] = useState([]);
+  
   useEffect(() => {
     fetch('http://localhost:8000/podcasts/')
       .then((res) => {
@@ -22,12 +23,6 @@ const Podcasts = () => {
   return (
     <div className={classes.containerPodcasts}>
       {podcasts.map((podcast) => (
-        // <audio
-        //   key={podcast._id}
-        //   controls
-        // >
-        //     <source  src={`http://localhost:8000/podcasts/${podcast.podcastId}/listen`} />
-        // </audio>
         <Podcast key={podcast._id} podcast={podcast} />
       ))}
     </div>

@@ -1,0 +1,26 @@
+.podcast {
+  width: 70%;
+  min-width:300px;
+  max-width: 700px;
+  padding: 1em;
+  height: 10em;
+  margin: 30px auto;
+  -webkit-box-shadow: 1px 2px 15px 5px rgba(0,0,0,0.22); 
+  box-shadow: 1px 2px 15px 5px rgba(0,0,0,0.22);
+}
+
+.timeAgo{
+    margin-top: 20px;
+    font-weigth: bold;
+}
+
+.link{
+    margin-top:20px;
+    font-weight: bold;
+    color:var(--black);
+}
+
+.link:hover{
+    text-decoration:underline;
+    transition: all 0.4s ease;
+}
