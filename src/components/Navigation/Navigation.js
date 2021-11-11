@@ -8,7 +8,7 @@ import Logo from '../UI/Logo/Logo';
 import HamburgerMenu from '../UI/HamburgerMenu/HamburgerMenu';
 
 function Navigation() {
-    return <header>
+    return <header className={classes.headerBar}>
                 <Logo />
                 <HamburgerMenu />
             </header>

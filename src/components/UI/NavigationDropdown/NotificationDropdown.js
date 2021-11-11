@@ -23,7 +23,7 @@ function NotificationDropdown() {
           <li>
             <CustomLink to="/" content="items "/>
           </li>
-          <li>another</li>
+          <li><CustomLink to="/add-podcast" content="Add Podcast" /></li>
           <li>Something else</li>
           <li>
           <CustomLink to="/podcasts" content="Podcasts "/>

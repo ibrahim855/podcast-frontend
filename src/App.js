@@ -12,11 +12,16 @@ import Notification from './components/UI/Notification/Notification';
 //REDUX STUFF
 import { useSelector } from 'react-redux';
 
+
+//AUTO LOGIN
+import AutoLogin from './Auto/AutoLogin';
+
+
 function App() {
   const notification = useSelector((state) => state.ui.notification);
 
   return (
-    <React.Fragment>
+    <AutoLogin>
       {
       notification && (
         <Notification
@@ -28,7 +33,7 @@ function App() {
         <Route path="/auth" exact element={<Auth />} />
         <Route path="*" element={<Home  />} />
       </Routes>
-    </React.Fragment>
+    </AutoLogin>
   );
 }
 
