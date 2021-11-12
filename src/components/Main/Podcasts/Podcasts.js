@@ -1,24 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import classes from './Podcasts.module.css';
 
+//REDUX STUFF
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchPodcasts } from '../../../context/podcast/podcast-actions';
 
 //COMPONENTS
 import Podcast from './Podcast/Podcast';
 
 
+let fetched = false;
+
 const Podcasts = () => {
-  const [podcasts, setPodcasts] = useState([]);
-  
+  // const [podcasts, setPodcasts] = useState([]);
+  const podcasts = useSelector((state) => state.podcast.podcasts);
+  const dispatch = useDispatch();
+
+
+  // this runs one time
   useEffect(() => {
-    fetch('http://localhost:8000/podcasts/')
-      .then((res) => {
-        return res.json();
-      })
-      .then((podcasts) => {
-        console.log(podcasts);
-        setPodcasts(podcasts);
-      });
-  }, []);
+    if(!fetched) {
+      dispatch(fetchPodcasts());
+    };
+    fetched = true;
+  }, [dispatch]);
+  
 
   return (
     <div className={classes.containerPodcasts}>

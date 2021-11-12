@@ -1,13 +1,17 @@
+.inputContainer {
+    margin-bottom:20px;
+}
+
 .inputContainer input{
     display:block;
     width: 100%;
     padding:0;
     margin: 0;
-    font-size: 12px;
-    height: 2em;
+    height: 3em;
+    padding-left:30px;
+    font-size: 14px;
 }
 
 .inputContainer label {
-        margin-bottom: 10px;
+        font-weight:bold;
 }
-

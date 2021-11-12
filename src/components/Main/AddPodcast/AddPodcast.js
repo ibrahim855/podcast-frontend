@@ -2,11 +2,16 @@ import React, { useRef, useState } from 'react';
 import classes from './AddPodcast.module.css';
 
 //REDUX STUFF
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addPodcast as savePodcast } from '../../../context/podcast/podcast-actions';
+
+
+
 
 function AddPodcast() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [description, setDescription] = useState('');
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.authentication.token);
   const nice = new FormData();
 
@@ -18,24 +23,13 @@ function AddPodcast() {
     setSelectedFile(e.target.files[0]);
   };
 
+
+
   const addPodcast = (e) => {
     e.preventDefault();
     nice.append('image', selectedFile);
     nice.append('description', description);
-
-    fetch('http://localhost:8000/podcasts/add-podcast', {
-      body: nice,
-      headers: {
-        // 'Content-Type':'multipart/form-data',
-        // "Content-Type": "application/x-www-form-urlencoded",
-        authorization: token,
-      },
-      method: 'POST',
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((obj) => console.log(obj));
+    dispatch(savePodcast(nice, token));
   };
 
   return (

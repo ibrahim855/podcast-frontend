@@ -6,6 +6,9 @@ import classes from './Login.module.css';
 import { loginAction } from '../../../context/auth/auth-actions';
 import { useDispatch } from 'react-redux';
 
+//FRAMER MOTION STUFF
+import { motion } from 'framer-motion';
+
 //CUSTOM HOOKS
 import useInput from '../../../hooks/use-input';
 
@@ -13,17 +16,12 @@ import useInput from '../../../hooks/use-input';
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
 
-
-
-
 const Login = (props) => {
-  
   const {
     value: usernameValue,
     isValid: usernameValid,
     inputChange: usernameChanged,
   } = useInput((value) => value.trim().length > 5);
-
 
   const {
     value: passwordValue,
@@ -31,9 +29,7 @@ const Login = (props) => {
     inputChange: passwordChanged,
   } = useInput((value) => value.trim().length > 5);
 
-
   const { changeMode } = props;
-
 
   const dispatch = useDispatch();
 
@@ -49,13 +45,16 @@ const Login = (props) => {
     changeMode(false);
   };
 
-
-
-
   return (
-    <div className={classes.loginContainer}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className={classes.loginContainer}
+    >
       <form onSubmit={submitHandler}>
-
+        <h1 className={classes.titleForm}>Accesso</h1>
+          
         <Input
           type="text"
           content="Nome utente"
@@ -71,11 +70,12 @@ const Login = (props) => {
         />
 
         <Button content="Accedi" type="submit" />
-        <p>Non hai un'account? <u onClick={goToRegister}>registrati</u> ora.</p>
+        <p className={classes.message}>
+          Non hai un'account? <u onClick={goToRegister}>registrati</u> ora.
+        </p>
       </form>
-    </div>
+    </motion.div>
   );
-  
 };
 
 export default Login;

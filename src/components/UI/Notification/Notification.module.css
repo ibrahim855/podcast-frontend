@@ -10,6 +10,7 @@
     right:0;
     height: 3em;
     color:whitesmoke;
+    z-index:10000;
 }
 
 .error{

@@ -31,7 +31,7 @@ function PodcastFocus() {
 
   useEffect(() => {
     setCurrentTimeString(transformCurrentTiming(currentTime, (durationString.split(':'))));
-  }, [currentTime]);
+  }, [currentTime, durationString]);
 
 
   const changedPlayBack = (e) => {

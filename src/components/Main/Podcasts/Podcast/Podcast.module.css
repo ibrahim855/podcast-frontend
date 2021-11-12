@@ -11,7 +11,7 @@
 
 .timeAgo{
     margin-top: 20px;
-    font-weigth: bold;
+    font-weight: bold;
 }
 
 .link{
@@ -23,4 +23,9 @@
 .link:hover{
     text-decoration:underline;
     transition: all 0.4s ease;
+}
+
+.remove{
+    font-weight:bold;
+    color:red;
 }

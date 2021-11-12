@@ -1,15 +1,36 @@
-
 .loginContainer{
     width: 30%;
-    min-width: 300px;
+    min-width: 250px;
     max-width: 600px;
     height: 40%;
     display:flex;
     align-items:center;
     justify-content: center;
+    position:absolute;
 }
 
 form{
     width: 100%;
     margin: 0 auto;
+}
+.titleForm{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.message{
+    margin-top:40px;
+    font-weight: 600;
+}
+ 
+.message u {
+    font-weight:bold;
+    text-decoration:underline;
+    color: var(--blue);
+    cursor:pointer;
+}
+
+.message u:hover{
+    color: var(--black);
+    transition: all 0.3s ease;
 }

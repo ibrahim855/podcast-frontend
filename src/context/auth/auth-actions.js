@@ -3,6 +3,8 @@ import { UiActions } from '../ui/ui-slice';
 //UTLITY
 import { URL } from '../../utility/baseURL';
 
+
+
 export const loginAction = (username, password) => {
   return async (dispatch) => {
     const loginUser = async () => {
@@ -17,23 +19,38 @@ export const loginAction = (username, password) => {
         },
       });
       const res = await obj.json();
-      const { token, expiresIn } = res;
+      const { token, expiresIn, username: userName } = res;
+
       const onDayAfter = Date.now() + expiresIn;
       const newToken = 'Bearer ' + token;
 
       localStorage.setItem('token', newToken);
       localStorage.setItem('expiresIn', onDayAfter);
+      localStorage.setItem('username', userName);
 
-      dispatch(authActions.login(newToken));
+      dispatch(authActions.login({
+        token: newToken,
+        username:username
+      }));
+
+      
     };
 
     try {
       await loginUser();
+      dispatch(UiActions.setNotification({
+        status:'success',
+        content:'Accesso effettuato con successo.'
+      }));
     } catch (err) {
-      console.log(err);
+      dispatch(UiActions.setNotification({
+        status:'error',
+        content:'Ops qualcosa è andato storto.'
+      }));
     }
   };
 };
+
 
 export const registerAction = (username, password) => {
   return async (dispatch) => {
