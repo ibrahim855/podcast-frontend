@@ -19,6 +19,7 @@ const AuthSlice = createSlice({
         logout(state) {
             state.token = null;
             state.isLoggedIn = false;
+            state.username = "";
         }
     }
 });

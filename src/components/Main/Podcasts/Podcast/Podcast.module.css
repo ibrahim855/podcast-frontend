@@ -2,8 +2,8 @@
   width: 70%;
   min-width:300px;
   max-width: 700px;
-  padding: 1em;
-  height: 10em;
+  padding: 2em;
+  height: auto;
   margin: 30px auto;
   -webkit-box-shadow: 1px 2px 15px 5px rgba(0,0,0,0.22); 
   box-shadow: 1px 2px 15px 5px rgba(0,0,0,0.22);
@@ -28,4 +28,11 @@
 .remove{
     font-weight:bold;
     color:red;
+}
+.stats{
+    margin-top:20px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content: space-around;
 }

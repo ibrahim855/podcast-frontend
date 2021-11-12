@@ -98,9 +98,37 @@ export const removePodcast = (id, token) => {
       dispatch(
         UiActions.setNotification({
           status: 'error',
-          content: "qualcosa è andato storto.",
+          content: 'qualcosa è andato storto.',
         })
       );
+    }
+  };
+};
+
+// LIKE AND UNLIKE PODCAST
+
+export const likeUnlikePodcast = (id, token, username) => {
+  return async (dispatch) => {
+    const likeUnlikeRequest = async () => {
+      const res = await fetch(`${URL}/likes/${id}/like`, {
+        method:'POST',
+        headers: {
+          authorization: token,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error('Ops qualcosa è andato storto.');
+      }
+      const obj = await res.json();
+      const { action } = obj;
+      dispatch(PodcastActions.like({id, action, username}));
+    };
+
+    try {
+      await likeUnlikeRequest();
+    } catch (err) {
+      console.log(err);
     }
   };
 };

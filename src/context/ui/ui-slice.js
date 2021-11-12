@@ -4,7 +4,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     notification: null,
-    dropdown:false
+    dropdown:false,
+   
 };
 
 
@@ -20,7 +21,7 @@ const UiSlice = createSlice({
         },
         toggleDropDown(state) {
             state.dropdown = !state.dropdown;
-        }
+        },
     }
 });
 

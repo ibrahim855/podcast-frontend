@@ -10,12 +10,17 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import store from './context/store';
 import { Provider } from 'react-redux';
 
+//REACT CONTETX STUFF
+import { UiContextProvider } from './context/react-context/context';
+
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
+    <UiContextProvider>
+      <Router>
+        <App />
+      </Router>
+    </UiContextProvider>
   </Provider>,
   document.getElementById('root')
 );

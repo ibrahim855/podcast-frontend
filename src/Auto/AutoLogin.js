@@ -12,7 +12,13 @@ function AutoLogin(props) {
     
     useEffect(() => {
         if(localStorage.getItem('token')) {
-            dispatch(authActions.login(localStorage.getItem('token')));
+            const username = localStorage.getItem('username');
+            const token = localStorage.getItem('token');
+
+            dispatch(authActions.login({
+                token,
+                username,
+            }));
         }
     }, [dispatch]);
 
