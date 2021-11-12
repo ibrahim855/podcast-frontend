@@ -15,15 +15,17 @@ import { useSelector } from 'react-redux';
 // REACT CONTETX STUFF
 import uiContext from './context/react-context/context';
 
-
 //AUTO LOGIN
 import AutoLogin from './Auto/AutoLogin';
+
+//GUARDS
+import Guard from './Guards/Guard';
 
 function App() {
   const notification = useSelector((state) => state.ui.notification);
   const ctx = useContext(uiContext);
-  const {modal} = ctx;
-  
+  const { modal } = ctx;
+
   return (
     <AutoLogin>
       {modal && <Modal modal={modal} />}
@@ -34,8 +36,25 @@ function App() {
         />
       )}
       <Routes>
-        <Route path="/auth" exact element={<Auth />} />
-        <Route path="*" element={<Home />} />
+        <Route
+          path="/auth"
+          exac
+          notAuthenticatedRequired={true}
+          t
+          element={
+            <Guard noAuthenticationRequired={true}>
+              <Auth />
+            </Guard>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Guard authenticationRequired={true}>
+              <Home />
+            </Guard>
+          }
+        />
       </Routes>
     </AutoLogin>
   );

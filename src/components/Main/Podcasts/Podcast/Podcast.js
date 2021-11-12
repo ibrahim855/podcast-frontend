@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   removePodcast,
-  likeUnlikePodcast,
+  // likeUnlikePodcast,
 } from '../../../../context/podcast/podcast-actions';
 
 // REACT CONTEXT
@@ -43,9 +43,9 @@ function Podcast(props) {
     });
   };
 
-  const likePodcast = () => {
-    dispatch(likeUnlikePodcast(podcast.podcastId, token, username));
-  };
+  // const likePodcast = () => {
+  //   dispatch(likeUnlikePodcast(podcast.podcastId, token, username));
+  // };
 
   return (
     <div className={classes.podcast}>
@@ -69,8 +69,6 @@ function Podcast(props) {
         <p>Mi piace: {podcast.likeCount}</p>
         <p>Ascolti: {podcast.viewCount}</p>
       </div>
-
-      <p onClick={likePodcast}>Like</p>
     </div>
   );
 }

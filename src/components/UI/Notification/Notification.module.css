@@ -8,19 +8,20 @@
     top:0;
     left:0;
     right:0;
-    height: 3em;
+    height: 4em;
     color:whitesmoke;
     z-index:10000;
+    font-weight:bold;
 }
 
 .error{
-    background-color: red;
+    background-color: var(--red);
 }
 
 .success{
-    background-color:green;
+    background-color:var(--green);
 }
 
 .pending{
-    background-color:yellow;
+    background-color:var(--yellow);
 }

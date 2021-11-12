@@ -21,7 +21,7 @@ const PodcastSlice = createSlice({
       state.podcasts.splice(index, 1);
     },
     like(state, action) {
-      const { id, action: liked, username } = action.payload;
+      const { id, action: liked } = action.payload;
         
       const podcastIndex = state.podcasts.findIndex(
         (podcast) => podcast.podcastId === id

@@ -26,8 +26,10 @@
 }
 
 .remove{
+    margin-top:20px !important;
     font-weight:bold;
-    color:red;
+    color:navy;
+    border: 2px solid red;
 }
 .stats{
     margin-top:20px;

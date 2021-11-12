@@ -5,9 +5,18 @@
 }
 
 .btn{
-    height: 2em;
+    height: 3em;
     margin-top: 2em;
     border: none;
-    background-color: green;
+    background-color: var(--black);
     color:whitesmoke;
+    font-size: 16px;
+    cursor:pointer;
+}
+
+.btn:hover{
+    color: var(--black);
+    border: 2px solid var(--black);
+    background-color: white;
+    transition: all 1s ease;
 }

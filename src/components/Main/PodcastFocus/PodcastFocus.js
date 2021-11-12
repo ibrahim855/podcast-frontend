@@ -3,12 +3,17 @@ import classes from './PodcastFocus.module.css';
 import { useParams } from 'react-router-dom';
 
 
+//REDUX STUFF
+import { useDispatch, useSelector } from 'react-redux';
+import {likeUnlikePodcast} from '../../../context/podcast/podcast-actions';
+
 //COMPONENTS
 import PlayPause from '../../UI/PlayPause/PlayPause';
 
 
 //utility
 import {transformPodcastDuration, transformCurrentTiming} from '../../../utility/format.date';
+
 
 
 function PodcastFocus() {
@@ -19,11 +24,41 @@ function PodcastFocus() {
 
   const [durationString, setDurationString] = useState("00:00:00");
   const [currentTimeString, setCurrentTimeString] = useState("00:00:00");
+  
+  const username = useSelector(state => state.authentication.username);
+  const token = useSelector(state => state.authentication.token);
 
+  const dispatch = useDispatch();
+  const [like, setLike] = useState(true);
   const [clicked, setClicked] = useState(false);
   const [paused, setPaused] = useState(false);
   const params = useParams();
   const { podcastId } = params;
+
+
+  useEffect(() => {
+    fetch(`http://localhost:8000/podcasts/${podcastId}/get`).then(res => {
+    console.log(res); 
+    return res.json();
+    }).then((data) => {
+      const { likes, podcast } = data;
+      const index = likes.findIndex(like => like.author === username);
+      if(index >=  0) {
+        setLike(true)
+      } else {
+        setLike(false);
+      };
+
+    }).catch(err => console.log(err));
+  }, [podcastId, username]);
+
+
+  const toggleLike = () => {
+    dispatch(likeUnlikePodcast(podcastId, token, username));
+    setLike(prevState => !prevState);
+  };
+  
+  
 
   useEffect(() => {
    setDurationString(transformPodcastDuration(duration));
@@ -82,6 +117,7 @@ function PodcastFocus() {
       </div>
 
       <p className={classes.currentTime}>{currentTimeString}/{durationString}</p>
+      <p onClick={toggleLike}>{like ? "Unlike" : "Like"}</p>
     </div>
   );
 }

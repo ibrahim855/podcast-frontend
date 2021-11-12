@@ -18,8 +18,14 @@ export const loginAction = (username, password) => {
           'Content-Type': 'application/json',
         },
       });
+
+      if(!obj.ok) {
+        throw new Error((await obj.json()).message);
+      }
       const res = await obj.json();
       const { token, expiresIn, username: userName } = res;
+
+
 
       const onDayAfter = Date.now() + expiresIn;
       const newToken = 'Bearer ' + token;
@@ -45,7 +51,7 @@ export const loginAction = (username, password) => {
     } catch (err) {
       dispatch(UiActions.setNotification({
         status:'error',
-        content:'Ops qualcosa è andato storto.'
+        content:err.message
       }));
     }
   };
@@ -67,7 +73,7 @@ export const registerAction = (username, password) => {
       });
 
       if (!res.ok) {
-        throw new Error('Qualcosa è andato storto.');
+        throw new Error((await res.json()).message);
       }
 
       const obj = await res.json();
@@ -83,8 +89,12 @@ export const registerAction = (username, password) => {
 
     try {
       await registerUser(username, password);
+      
     } catch (err) {
-      console.log(err.message);
+      dispatch(UiActions.setNotification({
+        status:'error',
+        content: err.message
+      }));
     }
   };
 };

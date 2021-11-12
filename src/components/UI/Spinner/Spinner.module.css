@@ -1,0 +1,36 @@
+
+
+.containerSpinner{
+    position:absolute;
+    z-index:10000;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.containerSpinner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerSpinner::after{
+    content: '';
+    height:50px;
+    width:50px;
+    border-radius:50%;
+    border: 2px dashed black;
+    animation: animateLoadSpinner 1s ease infinite;
+}
+
+
+@keyframes animateLoadSpinner {
+    from {
+        transform: rotateZ(0deg);
+    } 
+    to {
+        transform: rotateZ(360deg);
+    }
+}
