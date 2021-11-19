@@ -40,10 +40,10 @@ function PodcastFocus() {
 
   useEffect(() => {
     fetch(`${URL}/podcasts/${podcastId}/get`).then(res => {
-    console.log(res); 
     return res.json();
     }).then((data) => {
       const { likes } = data;
+      console.log(likes);
       const index = likes.findIndex(like => like.author === username);
       if(index >=  0) {
         setLike(true)
@@ -99,8 +99,6 @@ function PodcastFocus() {
       setPaused(false);
     }
   };
-
-
 
   return (
     <div className={classes.listenPodcast}>

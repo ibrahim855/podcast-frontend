@@ -16,7 +16,6 @@ const Podcasts = () => {
   const podcasts = useSelector((state) => state.podcast.podcasts);
   const dispatch = useDispatch();
 
-
   // this runs one time
   useEffect(() => {
     if(!fetched) {
@@ -24,11 +23,19 @@ const Podcasts = () => {
     };
     fetched = true;
   }, [dispatch]);
-  
+
+
+   if(!podcasts) {
+     return <p>Loading...</p>
+   } 
+
+   if(podcasts.length === 0) {
+     return <p>Non vi è alcun podcast</p>
+   }
 
   return (
     <div className={classes.containerPodcasts}>
-      {podcasts.map((podcast) => (
+      { podcasts.map((podcast) => (
         <Podcast key={podcast._id} podcast={podcast} />
       ))}
     </div>

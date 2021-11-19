@@ -20,3 +20,42 @@
     background-color: white;
     transition: all 1s ease;
 }
+
+
+.loading {
+    position:relative;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading::before {
+    content: '';
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background-color: var(--white);
+    border: 1px solid var(--black);
+}
+
+.loading::after {
+    content:'';
+    position: absolute;
+    height:20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px dashed var(--black);
+    animation: animateLoadingButton 1s ease-in-out infinite;
+}
+
+
+@keyframes animateLoadingButton {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+};

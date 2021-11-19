@@ -11,6 +11,9 @@ import { useDispatch } from 'react-redux';
 
 //CUSTOM HOOKS
 import useInput from '../../../hooks/use-input';
+import useLoading from '../../../hooks/use-loading';
+
+
 
 //COMPONENTS
 import Input from '../../UI/Input/Input';
@@ -32,13 +35,20 @@ const Login = (props) => {
   const { changeMode } = props;
 
   const dispatch = useDispatch();
+  const { loading, onLoadingChanged } = useLoading();
+
 
   const submitHandler = async (e) => {
     e.preventDefault();
     if (!usernameValid || !passwordValid) {
       return;
     }
-    dispatch(loginAction(usernameValue, passwordValue));
+    onLoadingChanged(true);
+    const timeout = setTimeout(() => {
+      clearTimeout(timeout);
+      onLoadingChanged(false);
+      dispatch(loginAction(usernameValue, passwordValue));
+    }, 4000);
   };
 
   const goToRegister = () => {
@@ -69,7 +79,7 @@ const Login = (props) => {
           changed={passwordChanged}
         />
 
-        <Button content="Accedi" type="submit" />
+        <Button content="Accedi" type="submit" loading={loading} />
         <p className={classes.message}>
           Non hai un'account? <u onClick={goToRegister}>registrati</u> ora.
         </p>

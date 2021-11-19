@@ -39,8 +39,8 @@ export const addPodcast = (data, token) => {
         throw new Error('Ops Qualcosa è andato storto.');
       }
 
-      const podcast = await res.json();
-      dispatch(PodcastActions.setPodcasts(podcast));
+      const { podcast } = await res.json();
+      dispatch(PodcastActions.addPodcast(podcast));
     };
 
     try {
