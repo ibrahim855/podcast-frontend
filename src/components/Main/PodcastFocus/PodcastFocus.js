@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import classes from './PodcastFocus.module.css';
 import { useParams } from 'react-router-dom';
 
+import { URL } from '../../../utility/baseURL';
+
 
 //REDUX STUFF
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,7 +39,7 @@ function PodcastFocus() {
 
 
   useEffect(() => {
-    fetch(`http://localhost:8000/podcasts/${podcastId}/get`).then(res => {
+    fetch(`${URL}/podcasts/${podcastId}/get`).then(res => {
     console.log(res); 
     return res.json();
     }).then((data) => {
@@ -103,7 +105,7 @@ function PodcastFocus() {
   return (
     <div className={classes.listenPodcast}>
       <audio ref={podcastRef} autoPlay onTimeUpdate={changedPlayBack}>
-        <source src={`http://localhost:8000/podcasts/${podcastId}/listen`} />
+        <source src={`${URL}/podcasts/${podcastId}/listen`} />
       </audio>
       <div className={classes.player} onClick={playerClicked} >
 
