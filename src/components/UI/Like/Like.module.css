@@ -1,0 +1,20 @@
+
+.container {
+    height:30px;
+    width:30px;
+    border-radius: 50%;
+    cursor:pointer;
+    margin-left:20px;
+}
+
+.like {
+    border: 2px solid var(--green);
+    background-color: white;
+    transition: all 0.4s ease;
+}
+
+.unlike{
+    background-color: var(--green);
+    transition: all 0.4s ease;
+
+}

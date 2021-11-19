@@ -1,8 +1,6 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import classes from './PodcastFocus.module.css';
 import { useParams } from 'react-router-dom';
-
-import { URL } from '../../../utility/baseURL';
 
 
 //REDUX STUFF
@@ -20,6 +18,7 @@ import useLike from '../../../hooks/use-like';
 import PlayPause from '../../UI/PlayPause/PlayPause';
 import DurationBar from '../../UI/DurationBar/DurationBar';
 import Audio from '../../UI/Audio/Audio';
+import Like from '../../UI/Like/Like';
 
 
 let referenceAudio = null;
@@ -44,16 +43,11 @@ function PodcastFocus() {
     changeCurrentTimeString
   } = useTextDuration();
   const { podcastId } = params;
-  const { like, onToggleLike } = useLike(username, podcastId);
+  const { like, onToggleLike } = useLike(podcastId, username);
 
-
-  function makeIt() {
-    
-  }
-
-  if(!referenceAudio) {
-   makeIt(referenceAudio);
-  }
+const makeIt = useCallback((value) => {
+ referenceAudio = value;
+}, []);
 
 
 function handleLikeRequest () {
@@ -65,11 +59,11 @@ function handleLikeRequest () {
   // CALCULATING DURATION  AND CURRENT TIME
   useEffect(() => {
   changeDurationString(duration);
-  }, [duration]);
+  }, [duration,changeDurationString]);
 
   useEffect(() => {
     changeCurrentTimeString(currentTime);
-  }, [currentTime, durationString]);
+  }, [currentTime, durationString, changeCurrentTimeString]);
 
 
   const playerClicked = useCallback(() => {
@@ -95,13 +89,13 @@ function handleLikeRequest () {
 
   return (
     <div className={classes.listenPodcast}>
-      <Audio changedPlayBack={changedPlayBack} podcastId={podcastId} />
+      <Audio changedPlayBack={changedPlayBack} podcastId={podcastId} makeIt={makeIt}/>
       <div className={classes.player} onClick={playerClicked}>
           <DurationBar percentage={percentage} />
          { clicked &&  <PlayPause hide={playerClicked} play={ pausePlayPodcast } paused={paused} /> }
       </div>
       <p className={classes.currentTime}>{currentTimeString}/{durationString}</p>
-      <p onClick={handleLikeRequest}>{like ? "Unlike" : "Like"}</p>
+      <Like like={like} handleLikeRequest={handleLikeRequest} />
     </div>
   );
 }

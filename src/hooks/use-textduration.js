@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 
 
 //UTILITY FUNCTIONS
@@ -13,14 +13,14 @@ const useTextDuration = () => {
     const [currentTimeString, setCurrentTimeString] = useState("00:00:00");
 
 
-    const changeDurationString = (duration) => {
+    const changeDurationString = useCallback((duration) => {
            setDurationString(transformPodcastDuration(duration));
-    };
+    }, []);
 
 
-    const changeCurrentTimeString = (currentTime) => {
+    const changeCurrentTimeString = useCallback((currentTime) => {
         setCurrentTimeString(transformCurrentTiming(currentTime, (durationString.split(':'))));
-    }
+    }, [durationString])
 
     return {
         durationString, 

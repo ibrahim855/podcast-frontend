@@ -1,13 +1,17 @@
 import { URL } from '../../../utility/baseURL';
 
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 
 const Audio = (props) => {
     const { podcastId } = props;
-    const { changedPlayBack } = props;
+    const { changedPlayBack, makeIt } = props;
     const podcastRef = useRef();
+
+    useEffect(() => {
+        makeIt(podcastRef);
+    }, [makeIt]);
 
     const handleIt = () => {
         changedPlayBack(podcastRef);    
@@ -18,7 +22,6 @@ const Audio = (props) => {
         <source src={`${URL}/podcasts/${podcastId}/listen`} />
       </audio>
     )
-
 }
 
 export default Audio;
