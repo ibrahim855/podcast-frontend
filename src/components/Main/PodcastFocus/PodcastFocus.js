@@ -9,76 +9,68 @@ import { URL } from '../../../utility/baseURL';
 import { useDispatch, useSelector } from 'react-redux';
 import {likeUnlikePodcast} from '../../../context/podcast/podcast-actions';
 
+//CUSTOM HOOKS
+import useDurationBar from '../../../hooks/use-durationbar';
+import useTextDuration from '../../../hooks/use-textduration';
+import useLike from '../../../hooks/use-like';
+
+
+
 //COMPONENTS
 import PlayPause from '../../UI/PlayPause/PlayPause';
+import DurationBar from '../../UI/DurationBar/DurationBar';
+import Audio from '../../UI/Audio/Audio';
 
 
-//utility
-import {transformPodcastDuration, transformCurrentTiming} from '../../../utility/format.date';
-
+let referenceAudio = null;
 
 
 function PodcastFocus() {
-  const podcastRef = useRef();
-  const [percentage, setPercentage] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-
-  const [durationString, setDurationString] = useState("00:00:00");
-  const [currentTimeString, setCurrentTimeString] = useState("00:00:00");
-  
   const username = useSelector(state => state.authentication.username);
   const token = useSelector(state => state.authentication.token);
 
   const dispatch = useDispatch();
-  const [like, setLike] = useState(true);
   const [clicked, setClicked] = useState(false);
   const [paused, setPaused] = useState(false);
   const params = useParams();
+
+
+  const { percentage, changedPlayBack, duration, currentTime } = useDurationBar();
+
+  const {
+    durationString,
+    currentTimeString,
+    changeDurationString,
+    changeCurrentTimeString
+  } = useTextDuration();
   const { podcastId } = params;
+  const { like, onToggleLike } = useLike(username, podcastId);
 
 
-  useEffect(() => {
-    fetch(`${URL}/podcasts/${podcastId}/get`).then(res => {
-    return res.json();
-    }).then((data) => {
-      const { likes } = data;
-      console.log(likes);
-      const index = likes.findIndex(like => like.author === username);
-      if(index >=  0) {
-        setLike(true)
-      } else {
-        setLike(false);
-      };
+  function makeIt() {
+    
+  }
 
-    }).catch(err => console.log(err));
-  }, [podcastId, username]);
+  if(!referenceAudio) {
+   makeIt(referenceAudio);
+  }
 
 
-  const toggleLike = () => {
-    dispatch(likeUnlikePodcast(podcastId, token, username));
-    setLike(prevState => !prevState);
-  };
+function handleLikeRequest () {
+   dispatch(likeUnlikePodcast(podcastId, token, username));
+   onToggleLike();
+}
   
   
-
+  // CALCULATING DURATION  AND CURRENT TIME
   useEffect(() => {
-   setDurationString(transformPodcastDuration(duration));
+  changeDurationString(duration);
   }, [duration]);
 
   useEffect(() => {
-    setCurrentTimeString(transformCurrentTiming(currentTime, (durationString.split(':'))));
+    changeCurrentTimeString(currentTime);
   }, [currentTime, durationString]);
 
-
-  const changedPlayBack = (e) => {
-      const currentTime = Math.floor(podcastRef.current.currentTime);
-      const time = podcastRef.current.duration;
-      const currentPercentage = Math.floor((currentTime / time) * 100);
-      setCurrentTime(currentTime);
-      setDuration(time);
-      setPercentage(currentPercentage);
-  };
 
   const playerClicked = useCallback(() => {
       setClicked(prevState => !prevState);
@@ -92,32 +84,24 @@ function PodcastFocus() {
 
     setClicked(false);
     if(!paused) {
-      podcastRef.current.pause();
+      referenceAudio.current.pause();
       setPaused(true);
     } else {
-      podcastRef.current.play();
+      referenceAudio.current.play();
       setPaused(false);
     }
   };
 
+
   return (
     <div className={classes.listenPodcast}>
-      <audio ref={podcastRef} autoPlay onTimeUpdate={changedPlayBack}>
-        <source src={`${URL}/podcasts/${podcastId}/listen`} />
-      </audio>
-      <div className={classes.player} onClick={playerClicked} >
-
-          <div style={{width: percentage + "%",
-                      transition: "all 3s ease"}} className={classes.barPodcast}>
-          </div>
-          <div className={classes.barBackground}>
-
-          </div>
+      <Audio changedPlayBack={changedPlayBack} podcastId={podcastId} />
+      <div className={classes.player} onClick={playerClicked}>
+          <DurationBar percentage={percentage} />
          { clicked &&  <PlayPause hide={playerClicked} play={ pausePlayPodcast } paused={paused} /> }
       </div>
-
       <p className={classes.currentTime}>{currentTimeString}/{durationString}</p>
-      <p onClick={toggleLike}>{like ? "Unlike" : "Like"}</p>
+      <p onClick={handleLikeRequest}>{like ? "Unlike" : "Like"}</p>
     </div>
   );
 }

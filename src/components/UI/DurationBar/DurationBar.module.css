@@ -1,18 +1,4 @@
 
-
-.listenPodcast{
-   position:absolute;
-   width:100%;
-}
-
-
-.player{
-    position:relative;
-    margin-top:3em;
-    height:10em;
-    width: 100%;
-}
-
 .barPodcast{
     position:absolute;
     width:0;
@@ -30,10 +16,4 @@
     height:10px;
     background-color: var(--black);
     opacity:0.3;
-}
-
-.currentTime{
-    margin-left:10px;
-    font-size:18px;
-    font-weight:bold;
 }
