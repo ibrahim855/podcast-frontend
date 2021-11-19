@@ -14,11 +14,19 @@ import useLike from '../../../hooks/use-like';
 
 
 
+
+
 //COMPONENTS
 import PlayPause from '../../UI/PlayPause/PlayPause';
 import DurationBar from '../../UI/DurationBar/DurationBar';
 import Audio from '../../UI/Audio/Audio';
 import Like from '../../UI/Like/Like';
+
+
+
+//UTILITY
+import { percentageToSeconds } from '../../../utility/audio.format';
+
 
 
 let referenceAudio = null;
@@ -45,16 +53,21 @@ function PodcastFocus() {
   const { podcastId } = params;
   const { like, onToggleLike } = useLike(podcastId, username);
 
-const makeIt = useCallback((value) => {
- referenceAudio = value;
-}, []);
+  const makeIt = useCallback((value) => {
+  referenceAudio = value;
+  }, []);
 
 
-function handleLikeRequest () {
-   dispatch(likeUnlikePodcast(podcastId, token, username));
-   onToggleLike();
-}
-  
+  function handleLikeRequest () {
+    dispatch(likeUnlikePodcast(podcastId, token, username));
+    onToggleLike();
+  }
+
+
+  const mapPercToCurrTime = (currTime) => {
+    referenceAudio.current.currentTime = percentageToSeconds(currTime, referenceAudio);
+    setPaused(false);
+  }
   
   // CALCULATING DURATION  AND CURRENT TIME
   useEffect(() => {
@@ -70,7 +83,6 @@ function handleLikeRequest () {
       setClicked(prevState => !prevState);
   }, []);
 
-  
   const pausePlayPodcast = (e) => {
     if(e) {
       e.stopPropagation();
@@ -91,7 +103,7 @@ function handleLikeRequest () {
     <div className={classes.listenPodcast}>
       <Audio changedPlayBack={changedPlayBack} podcastId={podcastId} makeIt={makeIt}/>
       <div className={classes.player} onClick={playerClicked}>
-          <DurationBar percentage={percentage} />
+          <DurationBar percentage={percentage} mapPercToCurrTime={mapPercToCurrTime}/>
          { clicked &&  <PlayPause hide={playerClicked} play={ pausePlayPodcast } paused={paused} /> }
       </div>
       <p className={classes.currentTime}>{currentTimeString}/{durationString}</p>

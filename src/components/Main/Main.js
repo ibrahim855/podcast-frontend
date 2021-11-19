@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import classes from './Main.module.css';
@@ -12,9 +12,19 @@ import AddPodcast from './AddPodcast/AddPodcast';
 import PodcastFocus from './PodcastFocus/PodcastFocus';
 
 
+import { useDispatch } from 'react-redux';
+import { fetchPodcasts } from '../../context/podcast/podcast-actions';
 
 
 function Main() {
+  const dispatch = useDispatch();
+
+
+
+  useEffect(() => {
+      dispatch(fetchPodcasts());
+  }, [dispatch]);
+
   return (
     <div className={classes.homeContainer}>
       <Routes>

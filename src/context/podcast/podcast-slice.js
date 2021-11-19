@@ -22,11 +22,11 @@ const PodcastSlice = createSlice({
     },
     like(state, action) {
       const { id, action: liked } = action.payload;
-        
+     
       const podcastIndex = state.podcasts.findIndex(
         (podcast) => podcast.podcastId === id
       );
-
+  
       if (liked) {
         state.podcasts[podcastIndex].likeCount++;
       } else {
