@@ -7,7 +7,7 @@ import { registerAction } from '../../../context/auth/auth-actions';
 import { useDispatch } from 'react-redux';
 
 //REACT FRAMER STUFF
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 
 //CUSTOM HOOKS
 import useInput from '../../../hooks/use-input';
@@ -46,10 +46,10 @@ const Register = (props) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+    <div
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 0 }}
       className={classes.loginContainer}
     >
       <form onSubmit={submitHandler}>
@@ -73,7 +73,7 @@ const Register = (props) => {
           Hai già un account? <u onClick={goToLogin}> accedi</u> ora.
         </p>
       </form>
-    </motion.div>
+    </div>
   );
 };
 

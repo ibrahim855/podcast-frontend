@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from './Auth.module.css';
 
-import { AnimatePresence } from 'framer-motion';
+// import { AnimatePresence } from 'framer-motion';
 
 //COMPONENTS
 import Login from './Login/Login';
@@ -16,13 +16,9 @@ const Auth = () => {
 
   return (
     <div className={classes.authContainer}>
-      <AnimatePresence>
-        {isLoginMode && <Login changeMode={handleChangeMode} />}
-      </AnimatePresence>
+      {isLoginMode && <Login changeMode={handleChangeMode} />}
 
-      <AnimatePresence>
-        {!isLoginMode && <Register changeMode={handleChangeMode} />}
-      </AnimatePresence>
+      {!isLoginMode && <Register changeMode={handleChangeMode} />}
     </div>
   );
 };

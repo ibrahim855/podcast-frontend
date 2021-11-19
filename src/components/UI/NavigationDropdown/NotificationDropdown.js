@@ -4,7 +4,7 @@ import classes from './NotificationDropdown.module.css';
 
 //FOR NOW THIS COMPONENTS HAS DUMMY CONTENT
 // framer motion stuff
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 
 //REDUX STUFF
 import { useDispatch } from 'react-redux';
@@ -22,10 +22,10 @@ function NotificationDropdown() {
   }
 
   return (
-    <motion.div
-      initial={{ y: -200 }}
-      animate={{ y: 0 }}
-      exit={{ y: -1000 }}
+    <div
+      // initial={{ y: -200 }}
+      // animate={{ y: 0 }}
+      // exit={{ y: -1000 }}
       className={classes.dropdown}
     >
       <div className={classes.containerDropdowItems}>
@@ -60,7 +60,7 @@ function NotificationDropdown() {
           <li>Esci</li>
         </ul>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

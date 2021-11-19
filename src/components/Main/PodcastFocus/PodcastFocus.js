@@ -41,7 +41,7 @@ function PodcastFocus() {
     console.log(res); 
     return res.json();
     }).then((data) => {
-      const { likes, podcast } = data;
+      const { likes } = data;
       const index = likes.findIndex(like => like.author === username);
       if(index >=  0) {
         setLike(true)

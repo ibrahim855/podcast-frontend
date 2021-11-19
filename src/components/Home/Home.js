@@ -1,7 +1,7 @@
 import React from 'react';
 
 //FRAMER MOTION STUFF
-import { AnimatePresence } from 'framer-motion';
+// import { AnimatePresence } from 'framer-motion';
 
 //COMPONENTS
 import Navigation from '../Navigation/Navigation';
@@ -17,9 +17,9 @@ function Home() {
   return (
     <React.Fragment>
       <Navigation />
-      <AnimatePresence>
+      {/* <AnimatePresence> */}
         {dropdown && <NotificationDropdown />}
-      </AnimatePresence>
+      {/* </AnimatePresence> */}
       <Main />
     </React.Fragment>
   );
