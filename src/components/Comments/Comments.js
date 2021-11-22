@@ -10,7 +10,7 @@ function Comments() {
 
     return (
         <Layout>
-            <h4>Commenti.</h4>
+            <h4>Commenti</h4>
         </Layout>
     )
 };

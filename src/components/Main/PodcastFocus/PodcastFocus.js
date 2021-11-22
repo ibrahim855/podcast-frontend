@@ -32,14 +32,14 @@ let referenceAudio = null;
 function PodcastFocus() {
   const username = useSelector(state => state.authentication.username);
   const token = useSelector(state => state.authentication.token);
-
+  
   const dispatch = useDispatch();
   const [clicked, setClicked] = useState(false);
   const [paused, setPaused] = useState(false);
   const params = useParams();
+  const { podcastId } = params;
 
-
-  const { percentage, changedPlayBack, duration, currentTime } = useDurationBar();
+  const { percentage, changedPlayBack, duration, currentTime } = useDurationBar(podcastId);
 
   const {
     durationString,
@@ -47,7 +47,7 @@ function PodcastFocus() {
     changeDurationString,
     changeCurrentTimeString
   } = useTextDuration();
-  const { podcastId } = params;
+ 
   const { like, onToggleLike } = useLike(podcastId, username);
 
   const makeIt = useCallback((value) => {
