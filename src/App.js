@@ -1,25 +1,25 @@
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import React, { useContext } from 'react';
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import React, { useContext } from "react";
 
 //PAGES
-import Auth from './pages/Auth';
-import Home from './pages/Home';
+import Auth from "./pages/Auth";
+import Home from "./pages/Home";
 
 //COMPONENTS
-import Notification from './components/UI/Notification/Notification';
-import Modal from './components/UI/Modal/Modal';
+import Notification from "./components/UI/Notification/Notification";
+import Modal from "./components/UI/Modal/Modal";
 //REDUX STUFF
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 // REACT CONTETX STUFF
-import uiContext from './context/react-context/context';
+import uiContext from "./context/react-context/context";
 
 //AUTO LOGIN
-import AutoLogin from './Auto/AutoLogin';
+import AutoLogin from "./Auto/AutoLogin";
 
 //GUARDS
-import Guard from './Guards/Guard';
+import Guard from "./Guards/Guard";
 
 function App() {
   const notification = useSelector((state) => state.ui.notification);
