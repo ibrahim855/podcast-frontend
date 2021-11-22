@@ -13,9 +13,6 @@ import useTextDuration from '../../../hooks/use-textduration';
 import useLike from '../../../hooks/use-like';
 
 
-
-
-
 //COMPONENTS
 import PlayPause from '../../UI/PlayPause/PlayPause';
 import DurationBar from '../../UI/DurationBar/DurationBar';
@@ -108,6 +105,7 @@ function PodcastFocus() {
       </div>
       <p className={classes.currentTime}>{currentTimeString}/{durationString}</p>
       <Like like={like} handleLikeRequest={handleLikeRequest} />
+      
     </div>
   );
 }

@@ -1,74 +1,73 @@
-import { authActions } from './auth-slice';
-import { UiActions } from '../ui/ui-slice';
+import { authActions } from "./auth-slice";
+import { UiActions } from "../ui/ui-slice";
 //UTLITY
-import { URL } from '../../utility/baseURL';
-
-
+import { URL } from "../../utility/baseURL";
 
 export const loginAction = (username, password) => {
   return async (dispatch) => {
     const loginUser = async () => {
-      const obj = await fetch(URL + '/auth/login', {
-        method: 'POST',
+      const obj = await fetch(URL + "/auth/login", {
+        method: "POST",
         body: JSON.stringify({
           username: username,
           password: password,
         }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
-      if(!obj.ok) {
+      if (!obj.ok) {
         throw new Error((await obj.json()).message);
       }
       const res = await obj.json();
       const { token, expiresIn, username: userName } = res;
 
-
-
       const onDayAfter = Date.now() + expiresIn;
-      const newToken = 'Bearer ' + token;
+      const newToken = "Bearer " + token;
 
-      localStorage.setItem('token', newToken);
-      localStorage.setItem('expiresIn', onDayAfter);
-      localStorage.setItem('username', userName);
+      localStorage.setItem("token", newToken);
+      localStorage.setItem("expiresIn", onDayAfter);
+      localStorage.setItem("username", userName);
 
-      dispatch(authActions.login({
-        token: newToken,
-        username:username
-      }));
-
-      
+      dispatch(
+        authActions.login({
+          token: newToken,
+          username: username,
+        })
+      );
     };
 
     try {
       await loginUser();
-      dispatch(UiActions.setNotification({
-        status:'success',
-        content:'Accesso effettuato con successo.'
-      }));
+      dispatch(
+        UiActions.setNotification({
+          status: "success",
+          content: "Accesso effettuato con successo.",
+        })
+      );
     } catch (err) {
-      dispatch(UiActions.setNotification({
-        status:'error',
-        content:err.message
-      }));
+      dispatch(
+        UiActions.setNotification({
+          status: "error",
+          content: err.message,
+        })
+      );
     }
   };
 };
 
-
 export const registerAction = (username, password) => {
   return async (dispatch) => {
     const registerUser = async (username, password) => {
-      const res = await fetch(URL + '/auth/register', {
-        method: 'POST',
+      const res = await fetch(URL + "/auth/register", {
+        method: "POST",
         body: JSON.stringify({
           username,
           password,
         }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
@@ -80,7 +79,7 @@ export const registerAction = (username, password) => {
       if (obj.message) {
         dispatch(
           UiActions.setNotification({
-            status: 'error',
+            status: "error",
             content: obj.message,
           })
         );
@@ -89,12 +88,19 @@ export const registerAction = (username, password) => {
 
     try {
       await registerUser(username, password);
-      
+      dispatch(
+        UiActions.setNotification({
+          status: "success",
+          content: "Utente registrato con successo.",
+        })
+      );
     } catch (err) {
-      dispatch(UiActions.setNotification({
-        status:'error',
-        content: err.message
-      }));
+      dispatch(
+        UiActions.setNotification({
+          status: "error",
+          content: err.message,
+        })
+      );
     }
   };
 };

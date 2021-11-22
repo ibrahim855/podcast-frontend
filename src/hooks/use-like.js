@@ -22,7 +22,10 @@ const useLike = (podcastId, username) => {
       } else {
         setLike(false);
       };
-    }).catch(err => console.log(err));
+    }).catch(err => {
+      console.log(err);
+      console.log("NICEE"); 
+    });
   }, [podcastId, username]);
 
 
