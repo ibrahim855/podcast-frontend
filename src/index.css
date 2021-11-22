@@ -6,7 +6,7 @@
   --blue: #4361ee;
   --black: #001219;
   --red: #ae2012;
-  --white: #fff1e6;
+  --white: #ffffff;
   --green: #0a9396;
   --yellow:#e9c46a;
 }
@@ -14,6 +14,7 @@
 :root{
   font-size: 14px;
   /* z-index:-100; */
+  height:100%;
 }
 
 
@@ -28,4 +29,8 @@
 
 body {
   font-family: 'Red Hat Mono', monospace;
+}
+
+html{
+  height:100%;
 }

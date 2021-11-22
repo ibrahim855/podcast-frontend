@@ -19,7 +19,7 @@ import DurationBar from '../../UI/DurationBar/DurationBar';
 import Audio from '../../UI/Audio/Audio';
 import Like from '../../UI/Like/Like';
 
-
+import Comments from '../../Comments/Comments';
 
 //UTILITY
 import { percentageToSeconds } from '../../../utility/audio.format';
@@ -105,7 +105,7 @@ function PodcastFocus() {
       </div>
       <p className={classes.currentTime}>{currentTimeString}/{durationString}</p>
       <Like like={like} handleLikeRequest={handleLikeRequest} />
-      
+      <Comments />
     </div>
   );
 }

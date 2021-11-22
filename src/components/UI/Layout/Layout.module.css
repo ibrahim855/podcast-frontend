@@ -1,0 +1,16 @@
+.layout{
+    width: 80%;
+    margin: 0 auto;
+    height: 100%;
+    position: relative;
+}
+
+.fluid {
+    width:100%;
+}
+
+@media screen and (max-width: 500px) {
+    .layout{
+        width:100%;
+    }
+}
