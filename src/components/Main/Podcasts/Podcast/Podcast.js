@@ -31,6 +31,7 @@ function Podcast(props) {
     onChangeModal(null);
   };
 
+
   const notOk = () => {
     onChangeModal(null);
   };
@@ -42,10 +43,6 @@ function Podcast(props) {
       notOk: notOk,
     });
   };
-
-  // const likePodcast = () => {
-  //   dispatch(likeUnlikePodcast(podcast.podcastId, token, username));
-  // };
 
   return (
     <div className={classes.podcast}>

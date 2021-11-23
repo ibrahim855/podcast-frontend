@@ -1,44 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import classes from "./Comments.module.css";
 import { useParams } from "react-router-dom";
-
-//UTILITY
-import { URL } from "../../utility/baseURL";
 
 //LAYOUT
 import Layout from "../UI/Layout/Layout";
 
 //REACT-REDUX
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { fetchComments } from "../../context/comment/comment-actions";
 //COMPONENTS
 import Comment from "./Comment/Comment";
 import AddComment from "./AddComment/AddComment";
 
 function Comments() {
-  const [comments, setComments] = useState([]);
+  // const [comments, setComments] = useState([]);
   const params = useParams();
   const { podcastId } = params;
   const token = useSelector((state) => state.authentication.token);
+  const dispatch = useDispatch();
+
+  const comments = useSelector((state) => state.comment.comments);
 
   useEffect(() => {
-    fetch(`${URL}/comments/${podcastId}/getComments`, {
-      headers: {
-        authorization: token,
-      },
-    })
-      .then((response) => {
-        response
-          .json()
-          .then((data) => {
-            setComments(data);
-          })
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [podcastId, token]);
+    dispatch(fetchComments(token, podcastId));
+  }, [dispatch, token, podcastId]);
 
   return (
     <Layout>
