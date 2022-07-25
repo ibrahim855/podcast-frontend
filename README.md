@@ -1,1 +1,3 @@
-### feel free to contribute
+### this is a personal project for learning nothing more...
+
+feel free to contribute :)
