@@ -1,5 +1,1 @@
-# Podcast Application
-
-
-## TODO: 
-  ### update stuff
+### feel free to contribute
